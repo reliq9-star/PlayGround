@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#14231c" />
+    <meta
+      name="description"
+      content="The Salt Road — a text-based merchant trading game across twenty cities of the Amber Reach."
+    />
+    <title>The Salt Road — A Merchant’s Tale</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section class="start-screen" id="start-screen" aria-labelledby="game-title">
+        <div class="start-sun" aria-hidden="true"></div>
+        <div class="start-lines" aria-hidden="true"></div>
+        <svg class="start-panorama" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="start-haze" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d9b26b" stop-opacity="0" />
+              <stop offset="1" stop-color="#d9b26b" stop-opacity=".2" />
+            </linearGradient>
+            <linearGradient id="start-ridge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#49614e" />
+              <stop offset="1" stop-color="#1b2f25" />
+            </linearGradient>
+            <linearGradient id="start-fore" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1d3227" />
+              <stop offset="1" stop-color="#0e1b15" />
+            </linearGradient>
+          </defs>
+          <rect y="320" width="1440" height="400" fill="url(#start-haze)" />
+          <path d="M0 565 130 466 225 520 350 398 450 506 555 455 690 548 785 480 910 570 1040 448 1165 530 1280 455 1440 553V720H0Z" fill="#314a3b" opacity=".58" />
+          <path d="M0 618 150 526 255 590 375 488 512 596 610 540 760 618 880 540 1016 628 1130 548 1262 609 1360 544 1440 608V720H0Z" fill="url(#start-ridge)" />
+          <path d="M0 666 95 626 188 656 305 604 422 667 534 632 682 681 807 641 930 687 1052 638 1175 672 1300 621 1440 672V720H0Z" fill="url(#start-fore)" />
+          <path d="M147 690C280 636 372 660 487 614c102-41 166-24 249-1 91 25 166 2 255-38 83-37 157-22 255 7" fill="none" stroke="#d7b36a" stroke-width="2" opacity=".38" stroke-dasharray="3 11" />
+          <g fill="#0b1711" opacity=".9" transform="translate(580 650)">
+            <path d="M0 21h81v5H0z" />
+            <path d="M8 13h51l9 8H0z" />
+            <circle cx="17" cy="31" r="7" />
+            <circle cx="59" cy="31" r="7" />
+            <path d="M67 14c9 0 15 5 15 12H67zM80 25h9M62 12V5l14 2-2 9z" />
+            <path d="M88 0v21M94 0v21" stroke="#0b1711" stroke-width="2" />
+          </g>
+          <g fill="#0b1711" opacity=".55">
+            <path d="M1062 665c2-9 9-12 18-9l1 3c6-2 11 1 10 5l-10 5h-17z" />
+            <path d="M1100 668c1-7 6-10 13-8l1 2c4-1 7 1 7 4l-7 4h-14z" />
+            <path d="M422 655c1-6 5-8 10-6l1 2c3-1 5 0 5 3l-5 3h-11z" />
+          </g>
+        </svg>
+
+        <header class="start-top">
+          <a class="start-brand" href="#" aria-label="The Salt Road home">
+            <span class="brand-sun" aria-hidden="true"><i></i></span>
+            <span>THE SALT ROAD</span>
+          </a>
+          <div class="start-top-actions">
+            <span class="edition">A merchant’s tale · Anno 187</span>
+            <button class="ghost-button light" id="start-help" type="button">How to play</button>
+          </div>
+        </header>
+
+        <main class="start-main">
+          <div class="start-copy">
+            <p class="eyebrow light-eyebrow"><span></span> Across the Amber Reach</p>
+            <h1 id="game-title">The <em>Salt</em><br />Road</h1>
+            <p class="start-tagline">Twenty cities. Ten goods. One fortune.</p>
+            <p class="start-lede">
+              Buy low where the harvest is heavy. Sell dear where the cupboards are bare.
+              Keep your beasts fed, your waterskin full, and your name good on every road.
+            </p>
+            <div class="start-facts" aria-label="Game features">
+              <div><strong>20</strong><span>cities</span></div>
+              <div><strong>10</strong><span>goods</span></div>
+              <div><strong>6</strong><span>ways to travel</span></div>
+            </div>
+          </div>
+
+          <div class="start-card-wrap">
+            <div class="start-card">
+              <p class="card-kicker">The merchant’s wager</p>
+              <h2>Turn a purse of silver<br />into a name worth keeping.</h2>
+              <p>
+                One wagon, or good boots. Start with <strong>320 crowns</strong> and
+                make <strong>3,000</strong> before you hang up your boots for good.
+              </p>
+              <form class="start-form" id="start-form">
+                <label for="merchant-name">Your name on the ledger</label>
+                <input
+                  id="merchant-name"
+                  name="merchant-name"
+                  type="text"
+                  maxlength="24"
+                  autocomplete="off"
+                  placeholder="Ilyan Voss"
+                />
+                <button class="primary-button" id="start-game" type="submit" aria-label="Start game">
+                  <span>Start game</span>
+                  <span class="button-arrow" aria-hidden="true">→</span>
+                </button>
+                <button class="continue-button" id="continue-game" type="button" hidden>
+                  Continue saved journey
+                </button>
+              </form>
+              <p class="save-note"><span class="save-dot"></span> Autosaves after every trade and mile.</p>
+            </div>
+            <div class="start-stamp" aria-hidden="true">
+              <span>BY LAND</span>
+              <i>✦</i>
+              <span>BY BEAST</span>
+              <i>✦</i>
+              <span>BY WITS</span>
+            </div>
+          </div>
+        </main>
+
+        <footer class="start-footer">
+          <span>Rivermeet · Hearthford · Saffron Gate · Aurenne</span>
+          <span>Best played with the sound on</span>
+        </footer>
+      </section>
+
+      <div class="game-shell" id="game-shell" hidden>
+        <header class="topbar">
+          <div class="topbar-brand">
+            <span class="brand-sun small" aria-hidden="true"><i></i></span>
+            <div>
+              <span class="topbar-title">THE SALT ROAD</span>
+              <span class="topbar-sub" id="topbar-sub">A merchant’s tale</span>
+            </div>
+          </div>
+
+          <div class="day-readout" id="day-readout"></div>
+
+          <div class="topbar-tools">
+            <div class="purse-readout" id="purse-readout"></div>
+            <button class="icon-button" id="sound-toggle" type="button" aria-label="Toggle sound" title="Toggle sound">
+              <span class="sound-icon" data-icon="sound"></span>
+            </button>
+            <button class="icon-button" id="help-button" type="button" aria-label="How to play" title="How to play">
+              <span class="help-glyph">?</span>
+            </button>
+            <button class="icon-button" id="new-game-button" type="button" aria-label="New game" title="New game">
+              <span class="new-glyph">↺</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="workspace">
+          <aside class="rail rail-left" aria-label="Merchant and cargo">
+            <section class="merchant-card" id="merchant-card"></section>
+            <section class="rig-card panel" id="rig-card"></section>
+            <section class="cargo-card panel" id="cargo-card"></section>
+          </aside>
+
+          <section class="center-column" aria-label="City and market">
+            <section class="city-hero" id="city-hero" aria-label="Current city"></section>
+            <nav class="game-tabs" aria-label="Game sections">
+              <button class="tab-button" type="button" data-tab="market">Market</button>
+              <button class="tab-button" type="button" data-tab="roads">Roads</button>
+              <button class="tab-button" type="button" data-tab="caravan">Caravan</button>
+              <button class="tab-button mobile-only-tab" type="button" data-tab="atlas">Atlas</button>
+              <span class="tab-rule" aria-hidden="true"></span>
+              <span class="tab-context" id="tab-context"></span>
+            </nav>
+            <section class="main-panel panel" id="main-panel" aria-live="polite"></section>
+          </section>
+
+          <aside class="rail rail-right" aria-label="Map and roads">
+            <section class="map-card panel" id="map-card"></section>
+            <section class="route-card panel" id="route-card"></section>
+          </aside>
+        </main>
+
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <button class="mobile-tab" type="button" data-tab="market"><span data-icon="market"></span><b>Market</b></button>
+          <button class="mobile-tab" type="button" data-tab="roads"><span data-icon="route"></span><b>Roads</b></button>
+          <button class="mobile-tab" type="button" data-tab="caravan"><span data-icon="cart"></span><b>Caravan</b></button>
+          <button class="mobile-tab" type="button" data-tab="atlas"><span data-icon="map"></span><b>Atlas</b></button>
+        </nav>
+      </div>
+
+      <div class="modal-root" id="modal-root" hidden></div>
+      <div class="toast-root" id="toast-root" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
