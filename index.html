@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f1e5cd">
+  <title>The Salt Road — A Merchant’s Ledger</title>
+  <meta name="description" content="A text-based trading game. Haul grain, salt, and spice between twenty cities, and try not to die of thirst.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23a3481f'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23f7eedb' stroke-width='3'/%3E%3Cpath d='M32 11v9M32 44v9M11 32h9M44 32h9' stroke='%23f7eedb' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="./assets/fonts/eb-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <div class="brand-text">
+            <h1>The Salt Road</h1>
+            <p>A merchant’s ledger of the long road</p>
+          </div>
+        </div>
+
+        <div class="hud" aria-label="Ledger summary">
+          <div class="hud-item">
+            <span class="hud-label">Day</span>
+            <strong id="hudDay">1</strong>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">Purse</span>
+            <strong id="hudCoins">320</strong>
+            <span class="hud-unit">silver</span>
+          </div>
+          <div class="hud-item hud-item--rank">
+            <span class="hud-label">Standing</span>
+            <strong id="hudRank">Peddler</strong>
+          </div>
+          <div class="hud-item hud-item--place">
+            <span class="hud-label">Location</span>
+            <strong id="hudCity">Aldermoor</strong>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <button class="text-btn" data-action="how-to">How to play</button>
+          <button class="text-btn" data-action="new-game">New ledger</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout" id="layout">
+      <section class="panel panel--status" data-panel="caravan" id="statusPanel" role="tabpanel" aria-label="Caravan"></section>
+      <section class="panel panel--market" data-panel="market" id="marketPanel" role="tabpanel" aria-label="Market"></section>
+      <section class="panel panel--travel" data-panel="travel" id="travelPanel" role="tabpanel" aria-label="The road"></section>
+      <section class="panel panel--journal" data-panel="journal" id="journalPanel" role="tabpanel" aria-label="Field journal"></section>
+    </main>
+
+    <footer class="footer">
+      <p><span aria-hidden="true">✦</span> The Salt Road — a game of margins and miles</p>
+      <div class="footer-actions">
+        <button class="text-btn" data-action="how-to">How to play</button>
+        <button class="text-btn" data-action="new-game">New ledger</button>
+      </div>
+    </footer>
+  </div>
+
+  <nav class="tabbar" aria-label="Game sections" role="tablist">
+    <button role="tab" data-action="tab" data-tab="market" aria-controls="marketPanel" aria-selected="true">Market</button>
+    <button role="tab" data-action="tab" data-tab="travel" aria-controls="travelPanel" aria-selected="false">Road</button>
+    <button role="tab" data-action="tab" data-tab="caravan" aria-controls="statusPanel" aria-selected="false">Caravan</button>
+    <button role="tab" data-action="tab" data-tab="journal" aria-controls="journalPanel" aria-selected="false">Journal</button>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-root" id="modalRoot" hidden></div>
+
+  <noscript>
+    <p style="padding:24px;font-family:Georgia,serif">The Salt Road needs JavaScript to keep its ledger. Please enable it and reload.</p>
+  </noscript>
+  <script type="module" src="./src/ui.js"></script>
+</body>
+</html>
