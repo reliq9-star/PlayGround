@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#22392c" />
+  <meta name="description" content="Grain & Gold — a text-based merchant trading game across twenty cities. Buy low, sell high, and keep your caravan alive." />
+  <title>Grain &amp; Gold — A Merchant's Ledger</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2323392c'/%3E%3Cpath d='M16 25V9M16 13c-4 0-6-2-6-5 4 0 6 2 6 5zm0 0c4 0 6-2 6-5-4 0-6 2-6 5zm0 6c-4 0-6-2-6-5 4 0 6 2 6 5zm0 0c4 0 6-2 6-5-4 0-6 2-6 5z' fill='none' stroke='%23d8a63f' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-mobile-tab="road">
+  <div class="page-grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="masthead">
+      <div class="brand">
+        <div class="brand__seal" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="24" cy="24" r="17.5" fill="none" stroke="currentColor" stroke-width=".6" stroke-dasharray="1 3"/>
+            <path d="M24 36V14M24 19c-5 0-8-3-8-7 5 0 8 3 8 7zm0 0c5 0 8-3 8-7-5 0-8 3-8 7zm0 9c-5 0-8-3-8-7 5 0 8 3 8 7zm0 0c5 0 8-3 8-7-5 0-8 3-8 7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand__text">
+          <h1>Grain <span>&amp;</span> Gold</h1>
+          <p>A merchant's ledger of the twenty cities</p>
+        </div>
+      </div>
+
+      <div class="masthead__ledger">
+        <div class="purse">
+          <span class="eyebrow">Purse</span>
+          <div class="purse__value"><strong id="goldValue">500</strong><span>gold</span></div>
+        </div>
+        <div class="goal">
+          <div class="goal__label">
+            <span class="eyebrow">Road to fortune</span>
+            <span id="goalText" class="num">500 / 10,000</span>
+          </div>
+          <div class="goal__track" role="progressbar" aria-label="Progress to merchant prince" aria-valuemin="0" aria-valuemax="10000" aria-valuenow="500" id="goalBar">
+            <div class="goal__fill" id="goalFill"></div>
+          </div>
+        </div>
+        <button class="round-btn" id="helpBtn" type="button" aria-label="How to play" title="How to play">
+          <span>?</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="condition-strip" aria-label="Your condition">
+      <div class="meters">
+        <div class="meter meter--life">
+          <div class="meter__head"><span class="meter__name">Life</span><span class="meter__val num" id="lifeVal">100</span></div>
+          <div class="meter__track"><div class="meter__fill" id="lifeFill"></div></div>
+        </div>
+        <div class="meter meter--energy">
+          <div class="meter__head"><span class="meter__name">Energy</span><span class="meter__val num" id="energyVal">100</span></div>
+          <div class="meter__track"><div class="meter__fill" id="energyFill"></div></div>
+        </div>
+        <div class="meter meter--thirst">
+          <div class="meter__head"><span class="meter__name">Thirst</span><span class="meter__val num" id="thirstVal">100</span></div>
+          <div class="meter__track"><div class="meter__fill" id="thirstFill"></div></div>
+        </div>
+        <div class="meter meter--hunger">
+          <div class="meter__head"><span class="meter__name">Hunger</span><span class="meter__val num" id="hungerVal">100</span></div>
+          <div class="meter__track"><div class="meter__fill" id="hungerFill"></div></div>
+        </div>
+      </div>
+      <div class="caravan-badge">
+        <div class="caravan-badge__row">
+          <span class="eyebrow">Caravan</span>
+          <span class="chip chip--small" id="dayChip">Day 1</span>
+        </div>
+        <div class="caravan-badge__main">
+          <strong id="transportBadge">On Foot</strong>
+          <span class="num" id="capacityBadge">25/60</span>
+        </div>
+        <div class="caravan-badge__sub">
+          <span id="seasonBadge">Early Spring</span> · <span id="netWorthBadge" class="num">Net worth 620</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="desk">
+      <section class="panel panel--road" aria-labelledby="roadHeading">
+        <div class="panel__head">
+          <h2 id="roadHeading">The Road</h2>
+          <span class="chip" id="weatherChip">fair skies</span>
+        </div>
+
+        <div class="city-card">
+          <div class="city-card__head">
+            <div>
+              <h3 id="currentCityName">Aldermere</h3>
+              <span class="region" id="currentCityRegion">The Riverlands</span>
+            </div>
+            <span class="here-stamp" id="hereStamp">You are here</span>
+          </div>
+          <p class="city-card__blurb" id="currentCityBlurb"></p>
+          <div class="trade-hints" id="tradeHints"></div>
+          <div class="services" id="services"></div>
+        </div>
+
+        <div class="map-frame">
+          <div class="map-caption">
+            <span>The Twenty Cities</span>
+            <span class="map-hint" id="mapHint">Choose a pin to plan a route</span>
+          </div>
+          <svg id="map" viewBox="0 12 680 404" role="img" aria-label="Map of the twenty trading cities"></svg>
+          <div class="map-legend">
+            <span><i class="legend-dot legend-dot--current"></i>Your caravan</span>
+            <span><i class="legend-dot legend-dot--selected"></i>Destination</span>
+            <span><i class="legend-dot legend-dot--visited"></i>Visited</span>
+          </div>
+        </div>
+
+        <div class="destination" id="destination"></div>
+        <div class="rumours" id="rumours"></div>
+      </section>
+
+      <section class="panel panel--journal" aria-labelledby="journalHeading">
+        <div class="panel__head">
+          <h2 id="journalHeading">Journal</h2>
+          <span class="chip" id="journalChip">Day 1 · Early Spring</span>
+        </div>
+        <div class="journal" id="journal" aria-live="polite"></div>
+        <div class="quick-services" id="quickServices"></div>
+        <div class="journal-foot">
+          <div class="journal-stats" id="journalStats"></div>
+          <button class="text-btn" id="newGameBtn" type="button">New journey</button>
+        </div>
+      </section>
+
+      <section class="panel panel--market" aria-labelledby="marketHeading">
+        <div class="panel__head panel__head--tabs">
+          <h2 id="marketHeading">Market</h2>
+          <div class="mini-tabs" role="tablist" aria-label="Market and caravan">
+            <button class="mini-tab is-active" type="button" data-market-tab="market" role="tab" aria-selected="true">Market</button>
+            <button class="mini-tab" type="button" data-market-tab="caravan" role="tab" aria-selected="false">Caravan</button>
+          </div>
+        </div>
+
+        <div class="market-view" id="marketView">
+          <div class="market-bar">
+            <div class="market-bar__city">
+              <span class="eyebrow" id="marketCity">Aldermere market</span>
+              <span class="tiny">Buy low · sell high · prices drift daily</span>
+            </div>
+            <div class="qty" id="qtyPicker" role="group" aria-label="Trade quantity">
+              <button type="button" class="qty__btn is-active" data-qty="1">1</button>
+              <button type="button" class="qty__btn" data-qty="5">5</button>
+              <button type="button" class="qty__btn" data-qty="25">25</button>
+              <button type="button" class="qty__btn" data-qty="max">Max</button>
+            </div>
+          </div>
+          <div class="market-table" id="marketTable"></div>
+          <p class="market-note">Green prices are grown nearby. Rust prices are scarce here. The market buys at a tenth below its asking price.</p>
+        </div>
+
+        <div class="caravan-view" id="caravanView" hidden>
+          <div class="caravan-scroll" id="caravanScroll"></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-tabs" aria-label="Sections">
+      <button type="button" class="mobile-tab is-active" data-mobile-tab="road">
+        <span class="mobile-tab__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 20 12 4l8 16M8 13h8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        Road
+      </button>
+      <button type="button" class="mobile-tab" data-mobile-tab="journal">
+        <span class="mobile-tab__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        Journal
+      </button>
+      <button type="button" class="mobile-tab" data-mobile-tab="market">
+        <span class="mobile-tab__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 9h16l-1.5-5h-13zM5 9v11h14V9M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
+        Market
+      </button>
+    </nav>
+  </div>
+
+  <div class="overlay-root" id="overlayRoot" hidden></div>
+
+  <script type="module" src="src/ui.js"></script>
+</body>
+</html>
